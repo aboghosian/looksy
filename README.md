@@ -1,6 +1,7 @@
 # Looksy
 
-TODO: Write a gem description
+Looksy adds a caching layer for your ActiveRecord models
+that represent look up tables in your database.
 
 ## Installation
 
@@ -18,7 +19,12 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Include Looksy::Cacheable in your ActiveRecord class.
+Provides fetch_all and fetch_by_id(id) methods as well
+as intercepts method_missing so you can use dynamic methods
+such as fetch_by_name('name') or fetch_all_by_status('active').
+You can also fetch by multiple columns such as:
+fetch_by_type_and_status('type', 'status').
 
 ## Contributing
 

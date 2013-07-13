@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Looksy::VERSION
   gem.authors       = ["Artin Boghosian"]
   gem.email         = ["artinboghosian@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Add a caching layer to your ActiveRecord models that represent look up tables}
+  gem.summary       = %q{Caching layer for look up tables}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
