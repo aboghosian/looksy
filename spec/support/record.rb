@@ -1,5 +1,5 @@
 class Record < Struct.new(:id, :name, :type)
-  include Looksy::Cacheable
+  extend Looksy::Cacheable
 
   def self.all
     @all ||= [
