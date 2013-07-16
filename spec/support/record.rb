@@ -27,7 +27,6 @@ class Record < Struct.new(:id, :name, :type)
   end
 end
 
-=begin
 class OtherRecord < Struct.new(:id)
   include Looksy::Cacheable
 
@@ -49,4 +48,3 @@ class OtherRecord < Struct.new(:id)
     }
   end
 end
-=end

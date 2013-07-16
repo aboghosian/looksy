@@ -2,32 +2,25 @@ module Looksy
   module Cacheable
     def self.included(base)
       base.extend(ClassMethods)
-      base.class_eval do
-        def self.cache_key
-          @cache_key ||= [self.name.downcase, 'all'].join('/')
-        end
-
-        def self.cache_key=(key)
-          @cache_key = key
-        end
-
-        def self.cache_options
-          @cache_options ||= {}
-        end
-
-        def self.cache_options=(options = {})
-          @cache_options = options
-        end
-
-        private
-
-        def self.lookup
-          @lookup ||= Looksy::Lookup.new(self, defined?(Rails) ? Rails.cache : Looksy::NullCache.new)
-        end
-      end
     end
 
     module ClassMethods
+      def cache_key
+        @cache_key ||= [self.name.downcase, 'all'].join('/')
+      end
+
+      def cache_key=(key)
+        @cache_key = key
+      end
+
+      def cache_options
+        @cache_options ||= {}
+      end
+
+      def cache_options=(options = {})
+        @cache_options = options
+      end
+
       def fetch_all
         lookup.all
       end
@@ -43,6 +36,12 @@ module Looksy
         else
           super
         end
+      end
+
+      private
+
+      def lookup
+        @lookup ||= Looksy::Lookup.new(self, defined?(Rails) ? Rails.cache : Looksy::NullCache.new)
       end
     end
   end
