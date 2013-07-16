@@ -3,16 +3,25 @@ module Looksy
 
     def self.included(base)
       base.extend(ClassMethods)
-
-      base.class_eval do
-        cattr_accessor :cache_key, :cache_options
-
-        self.cache_key = [self.name, 'all'].join('/')
-        self.cache_options = {}
-      end
     end
 
     module ClassMethods
+      def cache_key
+        @@cache_key ||= [self.name.downcase, 'all'].join('/')
+      end
+
+      def cache_key=(key)
+        @@cache_key = key
+      end
+
+      def cache_options
+        @@cache_options ||= {}
+      end
+
+      def cache_options=(options = {})
+        @@cache_options = options
+      end
+
       def fetch_all
         lookup.all
       end
@@ -29,6 +38,8 @@ module Looksy
           super
         end
       end
+
+      private
 
       def lookup
         @lookup ||= begin
