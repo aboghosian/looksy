@@ -27,24 +27,8 @@ class Record < Struct.new(:id, :name, :type)
   end
 end
 
-class OtherRecord < Struct.new(:id)
-  include Looksy::Cacheable
-
-  def self.all
-    @all ||= [new(1), new(2), new(3)]
-  end
-
-  def self.first
-    all.first
-  end
-
-  def self.last
-    all.last
-  end
-
-  def attributes
-    {
-      "id" => id
-    }
+class TestCacheStore
+  def fetch(key, options)
+    nil
   end
 end

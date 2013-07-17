@@ -4,7 +4,34 @@ require "support/record"
 describe Looksy::Cacheable do
   let(:klass) { Record }
 
+  describe '.cache_store' do
+    after { klass.cache_store = nil }
+
+    context 'when not set' do
+      context 'when using Rails' do
+        it 'returns the cache store from Rails'
+      end
+
+      context 'when not using Rails' do
+        it 'returns the default cache store' do
+          klass.cache_store.should be_a(Looksy::NullCache)
+        end
+      end
+    end
+
+    context 'when set' do
+      let(:store) { TestCacheStore.new }
+
+      it 'returns the correct cache store' do
+        klass.cache_store = store
+        klass.cache_store.should eql(store)
+      end
+    end
+  end
+
   describe '.cache_key' do
+    after { klass.cache_key = nil }
+
     context 'when not set' do
       it 'returns the default cache key' do
         klass.cache_key.should eql('record/all')
@@ -20,6 +47,8 @@ describe Looksy::Cacheable do
   end
 
   describe '.cache_options' do
+    after { klass.cache_options = nil }
+
     context 'when not set' do
       it 'returns the default cache options' do
         klass.cache_options.should eql({})
