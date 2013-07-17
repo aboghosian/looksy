@@ -5,6 +5,14 @@ module Looksy
     end
 
     module ClassMethods
+      def cache_store
+        @cache_store ||= defined?(Rails) ? Rails.cache : Looksy::NullCache.new
+      end
+
+      def cache_store=(store)
+        @cache_store = store
+      end
+
       def cache_key
         @cache_key ||= [self.name.downcase, 'all'].join('/')
       end
@@ -41,7 +49,7 @@ module Looksy
       private
 
       def lookup
-        @lookup ||= Looksy::Lookup.new(self, defined?(Rails) ? Rails.cache : Looksy::NullCache.new)
+        @lookup ||= Looksy::Lookup.new(self, cache_store)
       end
     end
   end
