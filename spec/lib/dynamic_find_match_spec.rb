@@ -38,6 +38,19 @@ describe Looksy::DynamicFindMatch do
           match.finder.should eql(:select)
         end
       end
+
+      context 'when method finds last record' do
+        let(:method) { :find_last_by_this }
+        let(:match) { Looksy::DynamicFindMatch.match(method) }
+
+        it 'returns the correct extractor' do
+          match.extractor.should eql(:last)
+        end
+
+        it 'returns the correct finder' do
+          match.finder.should eql(:select)
+        end
+      end
     end
 
     context 'when method does not match' do

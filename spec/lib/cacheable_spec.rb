@@ -69,6 +69,18 @@ describe Looksy::Cacheable do
     end
   end
 
+  describe '.fetch_first' do
+    it 'returns the first record' do
+      klass.fetch_first.should eql(klass.first)
+    end
+  end
+
+  describe '.fetch_last' do
+    it 'returns the last record' do
+      klass.fetch_last.should eql(klass.last)
+    end
+  end
+
   describe '.fetch_by_id' do
     let(:record) { klass.last }
 

@@ -33,6 +33,14 @@ module Looksy
         lookup.all
       end
 
+      def fetch_first
+        lookup.find_first
+      end
+
+      def fetch_last
+        lookup.find_last
+      end
+
       def fetch_by_id(id)
         lookup.find_by_id(id)
       end
