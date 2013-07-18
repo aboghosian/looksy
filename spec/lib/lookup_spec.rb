@@ -12,6 +12,18 @@ describe Looksy::Lookup do
     end
   end
 
+  describe '#find_first' do
+    it 'retrieves the first record' do
+      lookup.find_first.should eql(klass.first)
+    end
+  end
+
+  describe '#find_last' do
+    it 'retrieves the last record' do
+      lookup.find_last.should eql(klass.last)
+    end
+  end
+
   describe '#find_by_id' do
     let(:record) { lookup.find_by_id(2) }
 
@@ -46,7 +58,7 @@ describe Looksy::Lookup do
       context 'when finding by single attribute' do
         let(:record) { lookup.find_by_name('Artin') }
 
-        it 'returns the matching receord' do
+        it 'returns the matching record' do
           record.name.should eql('Artin')
         end
       end
@@ -58,6 +70,15 @@ describe Looksy::Lookup do
           record.name.should eql('George')
           record.type.should eql('QA')
         end
+      end
+    end
+
+    context 'when finding last matching record' do
+      let(:match) { Record.all.select { |r| r.name == 'Artin'}.last }
+      let(:record) { lookup.find_last_by_name('Artin') }
+
+      it 'returns the matching record' do
+        record.should eql(match)
       end
     end
   end

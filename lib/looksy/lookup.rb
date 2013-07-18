@@ -9,6 +9,14 @@ module Looksy
       @cache.fetch(@klass.cache_key, @klass.cache_options) { @klass.all }
     end
 
+    def find_first
+      all.first
+    end
+
+    def find_last
+      all.last
+    end
+
     def find_by_id(id)
       all.find { |record| record.id == id.to_i }
     end
@@ -21,13 +29,15 @@ module Looksy
           args[match.attributes.index(attribute)]
         end
 
-        all.send(match.finder) do |record|
+        result = all.send(match.finder) do |record|
           record_attributes = extract_attributes(match.attributes) do |attribute|
             record.send(attribute)
           end
 
           record_attributes == attributes
         end
+
+        match.extractor ? result.send(match.extractor) : result
       else
         super
       end
