@@ -1,10 +1,10 @@
 require "spec_helper"
 require "support/record"
 
-describe Looksy::Lookup do
+describe Looksy::Repository do
   let(:klass) { Record }
   let(:cache) { Looksy::NullCache.new }
-  let(:lookup) { Looksy::Lookup.new(klass, cache) }
+  let(:lookup) { Looksy::Repository.new(klass, cache) }
   
   describe '#all' do
     it 'retrieves all records' do

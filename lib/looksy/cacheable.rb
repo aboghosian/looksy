@@ -30,25 +30,25 @@ module Looksy
       end
 
       def fetch_all
-        lookup.all
+        repository.all
       end
 
       def fetch_first
-        lookup.first
+        repository.first
       end
 
       def fetch_last
-        lookup.last
+        repository.last
       end
 
       def fetch_by_id(id)
-        lookup.find_by_id(id)
+        repository.find_by_id(id)
       end
 
       def method_missing(method, *args, &block)
         if method.match(/^fetch/)
           method = method.to_s.gsub(/^fetch/, 'find')
-          lookup.send(method, *args, &block)
+          repository.send(method, *args, &block)
         else
           super
         end
@@ -56,8 +56,8 @@ module Looksy
 
       private
 
-      def lookup
-        @lookup ||= Looksy::Lookup.new(self, cache_store)
+      def repository
+        @repository ||= Looksy::Repository.new(self, cache_store)
       end
     end
   end
