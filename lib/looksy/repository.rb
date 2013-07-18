@@ -1,5 +1,5 @@
 module Looksy
-  class Lookup
+  class Repository
     def initialize(klass, cache)
       @klass = klass
       @cache = cache
