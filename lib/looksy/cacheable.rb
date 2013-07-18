@@ -34,11 +34,11 @@ module Looksy
       end
 
       def fetch_first
-        lookup.find_first
+        lookup.first
       end
 
       def fetch_last
-        lookup.find_last
+        lookup.last
       end
 
       def fetch_by_id(id)

@@ -12,15 +12,15 @@ describe Looksy::Lookup do
     end
   end
 
-  describe '#find_first' do
+  describe '#first' do
     it 'retrieves the first record' do
-      lookup.find_first.should eql(klass.first)
+      lookup.first.should eql(klass.first)
     end
   end
 
-  describe '#find_last' do
+  describe '#last' do
     it 'retrieves the last record' do
-      lookup.find_last.should eql(klass.last)
+      lookup.last.should eql(klass.last)
     end
   end
 
