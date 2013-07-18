@@ -9,11 +9,11 @@ module Looksy
       @cache.fetch(@klass.cache_key, @klass.cache_options) { @klass.all }
     end
 
-    def find_first
+    def first
       all.first
     end
 
-    def find_last
+    def last
       all.last
     end
 
