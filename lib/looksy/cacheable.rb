@@ -6,7 +6,7 @@ module Looksy
 
     module ClassMethods
       def cache_store
-        @cache_store ||= defined?(Rails) ? Rails.cache : Looksy::NullCache.new
+        @cache_store ||= defined?(Rails) ? Rails.cache : Looksy::Cache::Memory.new
       end
 
       def cache_store=(store)

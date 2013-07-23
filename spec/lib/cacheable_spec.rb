@@ -14,7 +14,7 @@ describe Looksy::Cacheable do
 
       context 'when not using Rails' do
         it 'returns the default cache store' do
-          klass.cache_store.should be_a(Looksy::NullCache)
+          klass.cache_store.should be_a(Looksy::Cache::Memory)
         end
       end
     end

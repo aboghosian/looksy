@@ -3,7 +3,7 @@ require "support/record"
 
 describe Looksy::Repository do
   let(:klass) { Record }
-  let(:cache) { Looksy::NullCache.new }
+  let(:cache) { Looksy::Cache::Memory.new }
   let(:lookup) { Looksy::Repository.new(klass, cache) }
   
   describe '#all' do
